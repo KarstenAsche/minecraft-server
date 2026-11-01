@@ -1,0 +1,24 @@
+# GIT
+.git
+.gitignore
+
+# Environment and secrets
+.env
+.env.*
+
+# Documentation
+README.md
+
+# Minecraft server data
+world/
+data/
+world_nether/
+world_the_end/
+logs/
+
+# Python
+__pycache__/
+.venv/
+
+# IDE
+.vscode/

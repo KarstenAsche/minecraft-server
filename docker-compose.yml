@@ -1,0 +1,14 @@
+services:
+  mc-server:
+    build: .
+    image: minecraft-server:1.0.0
+    ports:
+      - "8888:25565"
+    env_file:
+      - .env
+    volumes:
+      - minecraft_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  minecraft_data:

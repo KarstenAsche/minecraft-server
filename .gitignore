@@ -1,0 +1,25 @@
+# Environment Variables and Secrets
+.env
+.env.*
+!.env.example
+
+# Minecraft server data
+world/
+data/
+world_nether/
+world_the_end/
+
+# Server logs
+logs/
+*.log
+
+# Python
+__pycache__/
+.venv/
+*.pyc
+
+# IDE and OS
+.vscode/
+.DS_Store
+Thumbs.db
+
