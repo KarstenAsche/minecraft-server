@@ -5,9 +5,9 @@ A small DevSecOps training project that runs a **Minecraft Java Edition server**
 ## Table of contents
 
 - [Project objectives](#project-objectives)
-- [Repository contents](#repository-contents)
 - [Requirements](#requirements)
 - [Quick start](#quick-start)
+- [Repository contents](#repository-contents)
 - [Configuration](#configuration)
 - [How it works](#how-it-works)
 - [Usage and operations](#usage-and-operations)
@@ -23,22 +23,6 @@ A small DevSecOps training project that runs a **Minecraft Java Edition server**
 - Make the server reachable over TCP port **8888** on the Docker host.
 - Automatically restart the service when the main process unexpectedly exits.
 - Practice inspecting logs, testing connectivity, and troubleshooting containers.
-
-## Repository contents
-
-| File | Purpose |
-| --- | --- |
-| `Dockerfile` | Builds the custom image on top of `eclipse-temurin:25-jre`. |
-| `server.jar` | Official Minecraft Java server binary, copied into the image at build time. Obtain it from the official download page if it is not included in your checkout. |
-| `entrypoint.sh` | Checks EULA acceptance, applies supported environment settings, and starts Java. |
-| `docker-compose.yaml` | Defines the `mc-server` service, tagged image, port mapping, environment file, volume, and restart policy. |
-| `.env.example` | Example configuration values; safe to commit without secrets. |
-| `.env` | Local runtime configuration; **not committed** to Git. |
-| `.gitignore` | Excludes local environment files, generated data, and other unwanted content. |
-| `.dockerignore` | Excludes files unnecessary or unsafe for the Docker build context. |
-| `README.md` | Project documentation and testing instructions. |
-
-The project intentionally does not require a separate Python test script, Minecraft plugins, mods, a database, or an orchestration platform.
 
 ## Requirements
 
@@ -88,6 +72,22 @@ Read and accept the [Minecraft EULA](https://www.minecraft.net/eula) before sett
 
 7. Connect a compatible Minecraft Java client to `HOST_IP:8888`, or run the status test described below.
 
+## Repository contents
+
+| File | Purpose |
+| --- | --- |
+| `Dockerfile` | Builds the custom image on top of `eclipse-temurin:25-jre`. |
+| `server.jar` | Official Minecraft Java server binary, copied into the image at build time. Obtain it from the official download page if it is not included in your checkout. |
+| `entrypoint.sh` | Checks EULA acceptance, applies supported environment settings, and starts Java. |
+| `docker-compose.yml` | Defines the `mc-server` service, tagged image, port mapping, environment file, volume, and restart policy. |
+| `.env.example` | Example configuration values; safe to commit without secrets. |
+| `.env` | Local runtime configuration; **not committed** to Git. |
+| `.gitignore` | Excludes local environment files, generated data, and other unwanted content. |
+| `.dockerignore` | Excludes files unnecessary or unsafe for the Docker build context. |
+| `README.md` | Project documentation and testing instructions. |
+
+The project intentionally does not require a separate Python test script, Minecraft plugins, mods, a database, or an orchestration platform.
+
 ## Configuration
 
 Docker Compose loads `.env` into the container via `env_file`. The entrypoint converts the supported variables into arguments or values in `/app/data/server.properties`.
@@ -114,7 +114,8 @@ WHITE_LIST=true
 | `MOTD` | Message displayed in the multiplayer server list | `DevSecOps Minecraft Server` | `DevSecOps Minecraft Server` |
 | `WHITE_LIST` | Minecraft `white-list` setting (`true`/`false`) | `true` | `true` |
 
-> **Note:** The `WHITE_LIST` mapping is included for the latest project change. Confirm that the deployed `entrypoint.sh` contains the `WHITE_LIST` assignment and updates `white-list=` in `server.properties` before relying on it. Set `WHITE_LIST=false` only when intentionally allowing any authenticated player to join.
+[!NOTE]
+The `WHITE_LIST` mapping is included for the latest project change. Confirm that the deployed `entrypoint.sh` contains the `WHITE_LIST` assignment and updates `white-list=` in `server.properties` before relying on it. Set `WHITE_LIST=false` only when intentionally allowing any authenticated player to join.
 
 When changing only `.env`, recreate the container to apply new environment values **without rebuilding the image**:
 
@@ -172,6 +173,7 @@ docker compose up -d --force-recreate
 docker stats --no-stream
 ```
 
+[!CAUTION]
 **Do not run `docker compose down -v` when you want to preserve world data.** The `-v` option removes Compose-managed named volumes.
 
 Inspect the managed Minecraft settings:

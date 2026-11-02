@@ -1,7 +1,9 @@
 services:
   mc-server:
-    build: .
     image: minecraft-server:1.0.0
+    build: 
+          context: .
+          dockerfile: Dockerfile
     ports:
       - "8888:25565"
     env_file:
