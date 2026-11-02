@@ -114,8 +114,8 @@ WHITE_LIST=true
 | `MOTD` | Message displayed in the multiplayer server list | `DevSecOps Minecraft Server` | `DevSecOps Minecraft Server` |
 | `WHITE_LIST` | Minecraft `white-list` setting (`true`/`false`) | `true` | `true` |
 
-[!NOTE]
-The `WHITE_LIST` mapping is included for the latest project change. Confirm that the deployed `entrypoint.sh` contains the `WHITE_LIST` assignment and updates `white-list=` in `server.properties` before relying on it. Set `WHITE_LIST=false` only when intentionally allowing any authenticated player to join.
+> [!NOTE]
+> The `WHITE_LIST` mapping is included for the latest project change. Confirm that the deployed `entrypoint.sh` contains the `WHITE_LIST` assignment and updates `white-list=` in `server.properties` before relying on it. Set `WHITE_LIST=false` only when intentionally allowing any authenticated player to join.
 
 When changing only `.env`, recreate the container to apply new environment values **without rebuilding the image**:
 
@@ -173,8 +173,8 @@ docker compose up -d --force-recreate
 docker stats --no-stream
 ```
 
-[!CAUTION]
-**Do not run `docker compose down -v` when you want to preserve world data.** The `-v` option removes Compose-managed named volumes.
+> [!CAUTION]
+> **Do not run `docker compose down -v` when you want to preserve world data.** The `-v` option removes Compose-managed named volumes.
 
 Inspect the managed Minecraft settings:
 
